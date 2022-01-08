@@ -53,6 +53,10 @@ public class MovieServiceImplementation implements MovieService{
 
 	@Override
 	public Movie updateMovieDetails(int id, Movie movie) {
+		Movie savedMovie = getMovieDetailsById(id);
+		if(savedMovie != null){
+			movieRepository.save(movie);
+		}
 		return null;
 	}
 

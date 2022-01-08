@@ -55,12 +55,15 @@ public class MovieController {
 		return new ResponseEntity(movieDTO, HttpStatus.OK);
 	}
 
-//	@PutMapping(value = "updateMovie/{id}" , produces = MediaType.APPLICATION_JSON_VALUE,
-//			consumes = MediaType.APPLICATION_JSON_VALUE)
-//	public ResponseEntity updateMovie(@PathVariable(name = "id") int id, @RequestBody MovieDTO movieDTO){
-//		Movie movie = movieService.getMovieDetailsById(id);
-//		MovieDTO movieDTO = modelMapper.map(movie, MovieDTO.class);
-//
-//		return new ResponseEntity(movieDTO, HttpStatus.OK);
-//	}
+	@PutMapping(value = "updateMovie/{id}" , produces = MediaType.APPLICATION_JSON_VALUE,
+			consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity updateMovie(@PathVariable(name = "id") int id, @RequestBody MovieDTO movieDTO){
+
+		Movie newMovie = modelMapper.map(movieDTO, Movie.class);
+		Movie updateMovie = movieService.updateMovieDetails(id, newMovie);
+
+		MovieDTO updatedMovieDTO = modelMapper.map(updateMovie, MovieDTO.class);
+
+		return new ResponseEntity(updatedMovieDTO, HttpStatus.OK);
+	}
 }
