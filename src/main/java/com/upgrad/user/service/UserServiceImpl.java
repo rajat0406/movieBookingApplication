@@ -1,8 +1,11 @@
 package com.upgrad.user.service;
 
 import com.upgrad.user.dao.UserDao;
+import com.upgrad.user.dto.UserDTO;
 import com.upgrad.user.entities.User;
 import java.util.List;
+
+import com.upgrad.user.utils.POJOConvertor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,17 +18,31 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public User createUser(User user) {
-    return null;
+    return userDao.save(user);
   }
 
   @Override
-  public User getUserBasedOnId(int id) { return null; }
+  public User getUserBasedOnId(int id) {
+    return userDao.findById(id).get();
+  }
 
   @Override
-  public User updateUser(User user) { return null; }
+  public User updateUser(UserDTO userDTO) {
+    User savedUser = getUserBasedOnId(userDTO.getUserId());
+
+    if(savedUser != null) {
+      User updatedUser = POJOConvertor.covertUserDTOToEntity(userDTO);
+      return userDao.save(updatedUser);
+    }
+    return null;
+
+  }
 
   @Override
-  public User deleteUser(User user) { return  null ; }
+  public User deleteUser(User user) {
+    userDao.delete(user);
+    return null;
+  }
 
   public UserDao getUserDao() {
     return userDao;

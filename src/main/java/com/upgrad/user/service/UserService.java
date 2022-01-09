@@ -1,5 +1,6 @@
 package com.upgrad.user.service;
 
+import com.upgrad.user.dto.UserDTO;
 import com.upgrad.user.entities.User;
 import java.util.List;
 
@@ -10,7 +11,7 @@ public interface UserService {
 
   public User getUserBasedOnId(int id);
 
-  public User updateUser(User user);
+  public User updateUser(UserDTO userDTO);
 
   public User deleteUser(User user);
 
