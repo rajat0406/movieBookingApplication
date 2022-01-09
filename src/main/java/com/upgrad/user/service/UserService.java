@@ -11,7 +11,7 @@ public interface UserService {
 
   public User getUserBasedOnId(int id);
 
-  public User updateUser(UserDTO userDTO);
+  public User updateUser(User userDTO);
 
   public User deleteUser(User user);
 

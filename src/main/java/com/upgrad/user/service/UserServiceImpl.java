@@ -27,12 +27,11 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public User updateUser(UserDTO userDTO) {
-    User savedUser = getUserBasedOnId(userDTO.getUserId());
+  public User updateUser(User user) {
+    User savedUser = getUserBasedOnId(user.getUserId());
 
     if(savedUser != null) {
-      User updatedUser = POJOConvertor.covertUserDTOToEntity(userDTO);
-      return userDao.save(updatedUser);
+      return userDao.save(savedUser);
     }
     return null;
 
